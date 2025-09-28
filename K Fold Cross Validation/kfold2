@@ -1,0 +1,26 @@
+#import libraries
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+from sklearn.model_selection import cross_val_score
+
+#import data
+from sklearn.datasets import load_iris
+iris = load_iris()
+
+# cross validation scores (use cv=5)
+l_scores = cross_val_score(LogisticRegression(), iris.data, iris.target)
+print('Logistic avg:', np.mean(l_scores))
+
+s_scores = cross_val_score(SVC(), iris.data, iris.target)
+print('SVM avg:', np.mean(s_scores))
+
+r_scores = cross_val_score(RandomForestClassifier(n_estimators=40), iris.data, iris.target)
+print('Random Forest avg:', np.mean(r_scores))
+
+d_scores = cross_val_score(DecisionTreeClassifier(), iris.data, iris.target)
+print('Decision Tree avg:', np.mean(d_scores))
+
+
